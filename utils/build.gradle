@@ -1,32 +1,46 @@
 plugins {
+    id 'java-library'
+    id 'maven-publish'
     // id for library
     // id for maven to publish jar to local repository
 }
 
 java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
 // provide sourceCompatibility
 }
 
 repositories {
+    jcenter()
 // provide repository, where required dependencies are located
 }
 
 publishing {
     publications {
         maven(MavenPublication) {
+
+            groupId = 'com.epam'
+            artifactId = 'utils'
+            version = '1.3.5'
+
+            from components.java
 // provide groupId
 // provide artifactId
 // provide version
-
-            from components.java
         }
     }
+}
+
+dependencies {
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
 }
 
 //add Apache Apache Commons Lang 3.10 (or higher) dependency
 
 jar {
     manifest {
+        attributes 'Implementation-Title': 'Implementation Title',
+                'Implementation-Version': '1.0'
         //provide manifest with such attributes as 'Implementation-Title', 'Implementation-Version'
     }
 }
